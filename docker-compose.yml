@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  cs:
+    image: sha256:5c2a338139e00cafde4066585790f93ec7a7e90359c6924d0e9ee331b0a93eb1
+    ports:
+      - "8888:8888"
+
+  eureka-server:
+#   image: sha256:7dd1ecdc761e23fc07e1b22379f64e15bdd62dbeb8405aaaf48adffb4eddb17f
+   image: sha256:a952c20fd072b888069e969b0dbb828dbfcf83a928a13aefa4d6ddd721862fee
+   ports:
+     - "8070:8070"
+
+   depends_on:
+     - cs
+   command: sh -c './wait-for host:8888 -- cmd'
+#  database:
+#    image: 'postgres'
+#    deploy:
+#      mode: global
+#    environment:
+#      - POSTGRES_PASSWORD=password
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - "C:/docker-db-volume:/var/lib/postgresql/data"
